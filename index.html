@@ -16,6 +16,13 @@
 
 <body>
   <div id="root"></div>
+  <script type="text/javascript">
+    const params = new URLSearchParams(window.location.search);
+    const redirect = params.get('redirect');
+    if (redirect) {
+      history.replaceState(null, '', redirect);
+    }
+  </script>
 </body>
 
 </html>
