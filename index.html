@@ -14,7 +14,14 @@
 
 <body>
   <div id="root"></div>
-  <script type="module" src="/src/main.jsx"></script>
+  <script type="text/javascript">
+    const params = new URLSearchParams(window.location.search);
+    const redirect = params.get('redirect');
+    if (redirect) {
+      history.replaceState(null, '', redirect);
+    }
+  </script>
+  <script type="module" src="/src/index.jsx"></script>
 </body>
 
 </html>
