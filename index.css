@@ -11,12 +11,45 @@
   height: 0;
 }
 
+body {
+  container-type: inline-size;
+  font-family: "Roboto", sans-serif;
+  user-select: none;
+  min-width: 300px;
+}
+
 .app {
   width: 100%;
+  padding: 0 6cqmin;
+  background-color: rgb(66, 63, 219);
 }
 
 .center {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  gap: 4cqmin;
+  border-bottom: 3px solid rgb(255, 255, 255);
+  padding: 3cqmin 0;
+}
+.header-label {
+  margin-right: 1cqmin;
+  color: white;
+}
+.header-label-checkbox {
+  color: white;
+}
+
+@container (max-width: 600px) {
+  .header {
+    flex-direction: column;
+  }
+}
+.list {
+  width: 100%;
 }/*# sourceMappingURL=index.css.map */

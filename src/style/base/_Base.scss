@@ -10,3 +10,9 @@
         height: 0;
     }
 }
+body{
+    container-type: inline-size;
+    font-family: "Roboto", sans-serif;
+    user-select: none;
+    min-width: 300px;
+}

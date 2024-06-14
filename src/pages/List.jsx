@@ -1,3 +1,8 @@
+import Header from "../components/Header";
 export default function List() {
-    return <div>List</div>;
+    return (
+        <section className="list">
+            <Header />
+        </section>
+    );
 }

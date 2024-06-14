@@ -1,0 +1,21 @@
+.header {
+    width: 100%;
+    display: flex;
+    gap: 4cqmin;
+    border-bottom: 3px solid rgb(255, 255, 255);
+    padding: 3cqmin 0;
+    &-label {
+        margin-right: 1cqmin;
+        color: white;
+        &-checkbox {
+     
+            color: white;
+        }
+    }
+}
+
+@container (max-width: 600px) {
+    .header {
+        flex-direction: column;
+    }
+}

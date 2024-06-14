@@ -3,17 +3,23 @@
 
 <head>
   <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="/src/icon/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/src/icon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/src/icon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/src/icon/favicon-16x16.png">
   <link rel="manifest" href="/src/icon/site.webmanifest">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>PizzaSoft</title>
 </head>
 
 <body>
   <div id="root"></div>
+
+  <!-- redirect for gh-pages -->
   <script type="text/javascript">
     const params = new URLSearchParams(window.location.search);
     const redirect = params.get('redirect');
@@ -21,6 +27,7 @@
       history.replaceState(null, '', redirect);
     }
   </script>
+
   <script type="module" src="/src/index.jsx"></script>
 </body>
 
