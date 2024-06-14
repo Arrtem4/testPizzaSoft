@@ -1,7 +1,8 @@
 import { useState } from "react";
-import Select from "react-select";
+import Select, { components } from "react-select";
 
 export default function Header() {
+    const NoInput = (props) => <components.Input {...props} readOnly />;
     const sortList = [
         { value: "name", label: "Name" },
         { value: "date", label: "Birth date" },
@@ -30,13 +31,18 @@ export default function Header() {
             <div className="header-sort center">
                 <p className="header-label">Sort by:</p>
                 <div className="select-wrapper">
-                    <Select options={sortList} defaultValue={sortList[0]} />
+                    <Select
+                        components={{ Input: NoInput }}
+                        options={sortList}
+                        defaultValue={sortList[0]}
+                    />
                 </div>
             </div>
             <div className="header-position center">
                 <p className="header-label">Position:</p>
                 <div className="select-wrapper">
                     <Select
+                        components={{ Input: NoInput }}
                         options={positionList}
                         defaultValue={positionList[0]}
                     />{" "}
