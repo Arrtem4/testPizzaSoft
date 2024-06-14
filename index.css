@@ -53,6 +53,8 @@ body {
     flex-direction: column;
   }
 }
-.list {
-  width: 100%;
+.list-loading, .list-error {
+  text-align: center;
+  padding-top: 6cqmin;
+  color: white;
 }/*# sourceMappingURL=index.css.map */

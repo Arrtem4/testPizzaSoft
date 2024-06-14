@@ -3,6 +3,6 @@ import dataSlice from "./slices/dataSlice";
 
 export default configureStore({
     reducer: {
-        name: dataSlice,
+        dataSlice: dataSlice,
     },
 });

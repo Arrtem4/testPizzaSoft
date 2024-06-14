@@ -1,7 +1,13 @@
 import { useState } from "react";
+// import { useDispatch } from "react-redux";
 import Select, { components } from "react-select";
 
 export default function Header() {
+
+    // const dispatch = useDispatch();
+
+    const [showArchived, setShowArchived] = useState(false);
+
     const NoInput = (props) => <components.Input {...props} readOnly />;
     const sortList = [
         { value: "name", label: "Name" },
@@ -13,8 +19,6 @@ export default function Header() {
         { value: "waiter", label: "Waiter" },
         { value: "cook", label: "Cook" },
     ];
-
-    const [showArchived, setShowArchived] = useState(false);
 
     const handleCheckboxChange = () => {
         setShowArchived((prevShowArchived) => !prevShowArchived);
