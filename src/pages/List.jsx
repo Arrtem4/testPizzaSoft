@@ -1,10 +1,14 @@
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchData } from "../redux/slices/dataSlice";
 import Header from "../components/Header";
-import { useEffect } from "react";
+import ProfileCard from "../components/ProfileCard";
+
 export default function List() {
     const dispatch = useDispatch();
-    const { status, error } = useSelector((state) => state.dataSlice);
+    const { profilesList, status, error } = useSelector(
+        (state) => state.dataSlice
+    );
 
     useEffect(() => {
         if (status === "idle") {
@@ -22,7 +26,11 @@ export default function List() {
                 <div className="list-error">Error: {error}</div>
             )}
             {status === "succeeded" && (
-                <section className="list-container"></section>
+                <section className="list-container">
+                    {profilesList.map((profile) => (
+                        <ProfileCard key={profile.id} profile={profile} />
+                    ))}
+                </section>
             )}
         </section>
     );

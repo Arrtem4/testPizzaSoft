@@ -1,0 +1,29 @@
+.profile-card {
+    width: 50cqmin;
+    display: flex;
+    gap: 2cqmin;
+    background-color: white;
+    padding: 1cqmin;
+    border-radius: 12px;
+    &-photo {
+        width: 18cqmin;
+        height: 18cqmin;
+        border-radius: 50%;
+        background-color: rgb(163, 196, 221);
+        color: rgb(23, 18, 84);
+        align-self: center;
+    }
+    &-info {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+}
+
+@container (max-width: 600px) {
+    .profile-card {
+        width: 100%;
+        padding: 2cqmin;
+    }
+}
