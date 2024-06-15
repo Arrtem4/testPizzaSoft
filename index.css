@@ -118,7 +118,18 @@ body {
   border-radius: 8px;
   cursor: pointer;
 }
+.button__profile_photo {
+  font-size: clamp(14px, 1.7cqmin, 18px);
+  padding: 6px 10px;
+  align-self: flex-end;
+  background-color: rgb(20, 31, 88);
+}
 
+@container (max-width: 600px) {
+  .button__profile_photo {
+    align-self: center;
+  }
+}
 .list-container {
   display: flex;
   flex-wrap: wrap;
@@ -132,17 +143,34 @@ body {
   color: white;
 }
 
-.profile {
+.profile-page {
   width: 100%;
   background-color: white;
   padding: 4cqmin;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8cqmin;
 }
-.profile-wrapper {
+.profile-page-wrapper {
   width: 100%;
   padding: 2cqmin 6cqmin;
 }
+.profile-page-photo {
+  display: flex;
+  gap: 2cqmin;
+}
+.profile-page_settings-element {
+  display: flex;
+  align-items: center;
+  gap: 2cqmin;
+}
 
+@container (max-width: 600px) {
+  .profile-page-photo {
+    flex-direction: column;
+  }
+}
 .not-found {
   height: 100dvh;
 }

@@ -1,10 +1,30 @@
-.profile {
+.profile-page {
     width: 100%;
     background-color: white;
     padding: 4cqmin;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8cqmin;
     &-wrapper {
         width: 100%;
         padding: 2cqmin 6cqmin;
+    }
+    &-photo {
+        display: flex;
+        gap: 2cqmin;
+    }
+    &_settings-element{
+        display: flex;
+        align-items: center;
+        gap: 2cqmin
+    }
+}
+
+@container (max-width: 600px) {
+    .profile-page {
+        &-photo {
+            flex-direction: column;
+        }
     }
 }

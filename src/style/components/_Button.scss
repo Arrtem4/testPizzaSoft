@@ -7,4 +7,22 @@
     padding: 10px 20px;
     border-radius: 8px;
     cursor: pointer;
+    &__profile {
+        &_photo {
+            font-size: clamp(14px, 1.7cqmin, 18px);
+            padding: 6px 10px;
+            align-self: flex-end;
+            background-color: rgb(20, 31, 88);
+        }
+    }
+}
+
+@container (max-width: 600px) {
+    .button {
+        &__profile {
+            &_photo {
+                align-self: center;
+            }
+        }
+    }
 }
