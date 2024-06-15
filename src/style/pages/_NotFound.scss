@@ -1,0 +1,15 @@
+.not-found {
+    height: 100dvh;
+    &-message {
+        width: clamp(300px, 50%, 600px);
+        flex-direction: column;
+        background-color: white;
+        padding: clamp(80px, 15cqmin, 600px) 0;
+        gap: 5cqmin;
+        border-radius: 10px;
+        &-title {
+            font-size: clamp(24px, 4cqmin, 40px);
+            color: rgb(10, 18, 57);
+        }
+    }
+}

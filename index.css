@@ -108,6 +108,17 @@ body {
     width: 100%;
   }
 }
+.button {
+  background-color: rgb(11, 18, 55);
+  color: white;
+  font-family: inherit;
+  font-size: clamp(16px, 2cqmin, 20px);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
 .list-container {
   display: flex;
   flex-wrap: wrap;
@@ -119,4 +130,20 @@ body {
   text-align: center;
   padding-top: 6cqmin;
   color: white;
+}
+
+.not-found {
+  height: 100dvh;
+}
+.not-found-message {
+  width: clamp(300px, 50%, 600px);
+  flex-direction: column;
+  background-color: white;
+  padding: clamp(80px, 15cqmin, 600px) 0;
+  gap: 5cqmin;
+  border-radius: 10px;
+}
+.not-found-message-title {
+  font-size: clamp(24px, 4cqmin, 40px);
+  color: rgb(10, 18, 57);
 }/*# sourceMappingURL=index.css.map */
