@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
 export default function NotFound() {
+    const navigate = useNavigate();
+
     return (
         <section className="not-found center">
             <section className="not-found-message center">
@@ -8,6 +11,12 @@ export default function NotFound() {
                     onClick={() => window.history.back()}
                 >
                     Go back
+                </button>
+                <button
+                    className="button button__not-found"
+                    onClick={() => navigate("/")}
+                >
+                    Go main
                 </button>
             </section>
         </section>
