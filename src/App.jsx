@@ -9,7 +9,7 @@ export default function App() {
             <BrowserRouter basename="testPizzaSoft">
                 <Routes>
                     <Route path="/" index element={<List />}></Route>
-                    <Route path="/profile" element={<Profile />}></Route>
+                    <Route path="/profile/:id" element={<Profile />}></Route>
                     <Route path="*" element={<NotFound />}></Route>
                 </Routes>
             </BrowserRouter>

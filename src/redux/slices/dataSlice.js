@@ -7,7 +7,6 @@ export const fetchData = createAsyncThunk("dataSlice/fetchData", async () => {
 });
 
 const initialState = {
-    profilesListOriginal: [],
     profilesList: [],
     status: "idle",
     error: null,
@@ -22,11 +21,10 @@ const profilesList = createSlice({
     initialState,
     reducers: {
         sortProfiles: (state, action) => {
-            console.log(action.payload);
             switch (action.payload) {
                 case "name": {
-                    state.profilesList = state.profilesListOriginal.toSorted(
-                        (a, b) => a.name.localeCompare(b.name)
+                    state.profilesList = state.profilesList.toSorted((a, b) =>
+                        a.name.localeCompare(b.name)
                     );
                     break;
                 }
@@ -43,9 +41,6 @@ const profilesList = createSlice({
                 }
             }
         },
-        setItems(state, action) {
-            state.items = action.payload;
-        },
         setRoleFilter(state, action) {
             state.filters.role = action.payload;
         },
@@ -60,9 +55,8 @@ const profilesList = createSlice({
             })
             .addCase(fetchData.fulfilled, (state, action) => {
                 state.status = "succeeded";
-                state.profilesListOriginal = action.payload;
-                state.profilesList = state.profilesListOriginal.toSorted(
-                    (a, b) => a.name.localeCompare(b.name)
+                state.profilesList = action.payload.toSorted((a, b) =>
+                    a.name.localeCompare(b.name)
                 );
             })
             .addCase(fetchData.rejected, (state, action) => {
@@ -72,6 +66,6 @@ const profilesList = createSlice({
     },
 });
 
-export const { sortProfiles, setItems, setRoleFilter, setIsArchiveFilter } =
+export const { sortProfiles, setRoleFilter, setIsArchiveFilter } =
     profilesList.actions;
 export default profilesList.reducer;
