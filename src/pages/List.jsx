@@ -9,6 +9,10 @@ export default function List() {
     const { profilesList, status, error } = useSelector(
         (state) => state.dataSlice
     );
+    const roleFilter = useSelector((state) => state.dataSlice.filters.role);
+    const isArchiveFilter = useSelector(
+        (state) => state.dataSlice.filters.isArchive
+    );
 
     useEffect(() => {
         if (status === "idle") {

@@ -3,17 +3,12 @@ import { useDispatch } from "react-redux";
 import {
     sortByName,
     sortByBirthday,
-    filterByRole,
-    filterByArchive,
+    setRoleFilter,
+    setIsArchiveFilter,
 } from "../redux/slices/dataSlice";
 import Select, { components } from "react-select";
 
 export default function Header() {
-    const dispatch = useDispatch();
-
-    const [showArchived, setShowArchived] = useState(false);
-
-    const NoInput = (props) => <components.Input {...props} readOnly />;
     const sortList = [
         { value: "name", label: "Name" },
         { value: "date", label: "Birth date" },
@@ -25,16 +20,32 @@ export default function Header() {
         { value: "cook", label: "Cook" },
     ];
 
+    const dispatch = useDispatch();
+
+    const [showArchived, setShowArchived] = useState(false);
+    const [selectedSortOption, setSelectedSortOption] = useState(sortList[0]);
+    const [selectedPositionOption, setSelectedPositionOption] = useState(
+        positionList[0]
+    );
+
+    const NoInput = (props) => <components.Input {...props} readOnly />;
+
     const handleCheckboxChange = () => {
         setShowArchived(!showArchived);
-        dispatch(filterByArchive(!showArchived));
+        // dispatch(filterByArchive(!showArchived));
     };
 
-    // const [selectedOption, setSelectedOption] = useState("");
-
-    // const handleSelectChange = (event) => {
-    //     setSelectedOption(event.target.value);
-    // };
+    const handleSelectSortChange = (option) => {
+        setSelectedSortOption(option);
+        if (option.value === "name") {
+            dispatch(sortByName());
+        } else {
+            dispatch(sortByBirthday());
+        }
+    };
+    const handleSelectPositionChange = (option) => {
+        setSelectedPositionOption(option);
+    };
 
     return (
         <section className="header">
@@ -44,7 +55,9 @@ export default function Header() {
                     <Select
                         components={{ Input: NoInput }}
                         options={sortList}
+                        onChange={handleSelectSortChange}
                         defaultValue={sortList[0]}
+                        value={selectedSortOption}
                     />
                 </div>
             </div>
@@ -55,6 +68,8 @@ export default function Header() {
                         components={{ Input: NoInput }}
                         options={positionList}
                         defaultValue={positionList[0]}
+                        onChange={handleSelectPositionChange}
+                        value={selectedPositionOption}
                     />{" "}
                 </div>
             </div>

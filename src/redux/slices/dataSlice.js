@@ -6,14 +6,20 @@ export const fetchData = createAsyncThunk("dataSlice/fetchData", async () => {
     return data;
 });
 
+const initialState = {
+    profilesListOriginal: [],
+    profilesList: [],
+    status: "idle",
+    error: null,
+    filters: {
+        role: "all",
+        isArchive: false,
+    },
+};
+
 const profilesList = createSlice({
     name: "profilesList",
-    initialState: {
-        profilesListOriginal: [],
-        profilesList: [],
-        status: "idle",
-        error: null,
-    },
+    initialState,
     reducers: {
         sortByName: (state) => {
             state.profilesList = state.profilesListOriginal.toSorted((a, b) =>
@@ -21,27 +27,26 @@ const profilesList = createSlice({
             );
         },
         sortByBirthday: (state) => {
-            state.profilesList = state.profilesListOriginal.toSorted((a, b) => {
-                const dateA = new Date(a.birthday);
-                const dateB = new Date(b.birthday);
+            console.log(`first`);
+            const parseDate = (dateStr) => {
+                const [day, month, year] = dateStr.split(".");
+                return new Date(year, month - 1, day);
+            };
+            state.profilesList = state.profilesList.toSorted((a, b) => {
+                const dateA = parseDate(a.birthday);
+                const dateB = parseDate(b.birthday);
+                console.log(dateA, dateB);
                 return dateA - dateB;
             });
         },
-        filterByRole: (state, action) => {
-            state.profilesList = state.profilesList.filter(
-                (profile) => profile.role === action.payload
-            );
+        setItems(state, action) {
+            state.items = action.payload;
         },
-        filterByArchive: (state, action) => {
-            if (action.payload === true) {
-                state.profilesList = state.profilesList.filter(
-                    (profile) => profile.isArchive === true || profile.isArchive === false
-                );
-            } else {
-                state.profilesList = state.profilesList.filter(
-                    (profile) => profile.isArchive === false
-                );
-            }
+        setRoleFilter(state, action) {
+            state.filters.role = action.payload;
+        },
+        setIsArchiveFilter(state, action) {
+            state.filters.isArchive = action.payload;
         },
     },
     extraReducers: (builder) => {
@@ -54,8 +59,8 @@ const profilesList = createSlice({
                 state.profilesListOriginal = action.payload.toSorted((a, b) =>
                     a.name.localeCompare(b.name)
                 );
-                state.profilesList = state.profilesListOriginal.filter(
-                    (profile) => profile.isArchive === false
+                state.profilesList = state.profilesListOriginal.toSorted(
+                    (a, b) => a.name.localeCompare(b.name)
                 );
             })
             .addCase(fetchData.rejected, (state, action) => {
@@ -65,6 +70,11 @@ const profilesList = createSlice({
     },
 });
 
-export const { sortByName, sortByBirthday, filterByRole, filterByArchive } =
-    profilesList.actions;
+export const {
+    sortByName,
+    sortByBirthday,
+    setItems,
+    setRoleFilter,
+    setIsArchiveFilter,
+} = profilesList.actions;
 export default profilesList.reducer;
