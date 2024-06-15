@@ -7,8 +7,8 @@ export default function ProfileCard({ profile }) {
             <section className="profile-card-info">
                 <p className="profile-card-info-name">{profile.name}</p>
                 <p className="profile-card-info-phone">{profile.phone}</p>
-                <p className="profile-card-info-name">{profile.birthday}</p>
                 <p className="profile-card-info-position">{profile.role}</p>
+                <p className="profile-card-info-birthday">{profile.birthday}</p>
             </section>
         </section>
     );

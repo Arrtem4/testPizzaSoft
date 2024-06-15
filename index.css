@@ -15,7 +15,7 @@ body {
   container-type: inline-size;
   font-family: "Roboto", sans-serif;
   user-select: none;
-  min-width: 300px;
+  min-width: 350px;
 }
 
 .app {
@@ -54,16 +54,17 @@ body {
   }
 }
 .profile-card {
-  width: 50cqmin;
+  width: clamp(300px, 50cqmin, 500px);
   display: flex;
-  gap: 2cqmin;
+  gap: 3cqmin;
   background-color: white;
-  padding: 1cqmin;
+  padding: 2cqmin;
   border-radius: 12px;
+  cursor: pointer;
 }
 .profile-card-photo {
-  width: 18cqmin;
-  height: 18cqmin;
+  width: clamp(90px, 18cqmin, 150px);
+  height: clamp(90px, 18cqmin, 150px);
   border-radius: 50%;
   background-color: rgb(163, 196, 221);
   color: rgb(23, 18, 84);
@@ -74,18 +75,43 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  row-gap: 1cqmin;
+}
+.profile-card-info-name {
+  font-weight: 700;
+  font-size: clamp(15px, 2.5cqmin, 20px);
+}
+.profile-card-info-phone {
+  font-size: clamp(15px, 2.2cqmin, 18px);
+  user-select: text;
+}
+.profile-card-info-position {
+  font-weight: 500;
+  font-size: clamp(15px, 2.2cqmin, 20px);
+  background-color: rgb(16, 16, 131);
+  color: white;
+  width: fit-content;
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+.profile-card-info-birthday {
+  font-size: clamp(12px, 2cqmin, 16px);
 }
 
 @container (max-width: 600px) {
   .profile-card {
+    width: 80%;
+  }
+}
+@container (max-width: 470px) {
+  .profile-card {
     width: 100%;
-    padding: 2cqmin;
   }
 }
 .list-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 4cqmin;
+  gap: 5cqmin;
   padding: 5cqmin 2cqmin;
   justify-content: space-evenly;
 }
