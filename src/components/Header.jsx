@@ -1,25 +1,14 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
-    sortByName,
-    sortByBirthday,
+    sortProfiles,
     setRoleFilter,
     setIsArchiveFilter,
 } from "../redux/slices/dataSlice";
 import Select, { components } from "react-select";
+import { sortList, positionList } from "../data/optionLists";
 
 export default function Header() {
-    const sortList = [
-        { value: "name", label: "Name" },
-        { value: "date", label: "Birth date" },
-    ];
-    const positionList = [
-        { value: "all", label: "All" },
-        { value: "driver", label: "Driver" },
-        { value: "waiter", label: "Waiter" },
-        { value: "cook", label: "Cook" },
-    ];
-
     const dispatch = useDispatch();
 
     const [showArchived, setShowArchived] = useState(false);
@@ -32,19 +21,15 @@ export default function Header() {
 
     const handleCheckboxChange = () => {
         setShowArchived(!showArchived);
-        // dispatch(filterByArchive(!showArchived));
+        dispatch(setIsArchiveFilter(!showArchived));
     };
-
     const handleSelectSortChange = (option) => {
         setSelectedSortOption(option);
-        if (option.value === "name") {
-            dispatch(sortByName());
-        } else {
-            dispatch(sortByBirthday());
-        }
+        dispatch(sortProfiles(option.value));
     };
     const handleSelectPositionChange = (option) => {
         setSelectedPositionOption(option);
+        dispatch(setRoleFilter(option.value));
     };
 
     return (

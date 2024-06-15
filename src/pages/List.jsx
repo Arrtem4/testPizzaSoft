@@ -20,6 +20,13 @@ export default function List() {
         }
     }, [status, dispatch]);
 
+    const filteredProfiles = profilesList.filter((item) => {
+        const roleMatch = roleFilter === "all" || item.role === roleFilter;
+        const isArchiveMatch =
+            isArchiveFilter === true || item.isArchive === isArchiveFilter;
+        return roleMatch && isArchiveMatch;
+    });
+
     return (
         <section className="list">
             <Header />
@@ -31,7 +38,7 @@ export default function List() {
             )}
             {status === "succeeded" && (
                 <section className="list-container">
-                    {profilesList.map((profile) => (
+                    {filteredProfiles.map((profile) => (
                         <ProfileCard key={profile.id} profile={profile} />
                     ))}
                 </section>

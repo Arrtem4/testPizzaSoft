@@ -21,23 +21,27 @@ const profilesList = createSlice({
     name: "profilesList",
     initialState,
     reducers: {
-        sortByName: (state) => {
-            state.profilesList = state.profilesListOriginal.toSorted((a, b) =>
-                a.name.localeCompare(b.name)
-            );
-        },
-        sortByBirthday: (state) => {
-            console.log(`first`);
-            const parseDate = (dateStr) => {
-                const [day, month, year] = dateStr.split(".");
-                return new Date(year, month - 1, day);
-            };
-            state.profilesList = state.profilesList.toSorted((a, b) => {
-                const dateA = parseDate(a.birthday);
-                const dateB = parseDate(b.birthday);
-                console.log(dateA, dateB);
-                return dateA - dateB;
-            });
+        sortProfiles: (state, action) => {
+            console.log(action.payload);
+            switch (action.payload) {
+                case "name": {
+                    state.profilesList = state.profilesListOriginal.toSorted(
+                        (a, b) => a.name.localeCompare(b.name)
+                    );
+                    break;
+                }
+                case "date": {
+                    const parseDate = (dateStr) => {
+                        const [day, month, year] = dateStr.split(".");
+                        return new Date(year, month - 1, day);
+                    };
+                    state.profilesList = state.profilesList.toSorted((a, b) => {
+                        const dateA = parseDate(a.birthday);
+                        const dateB = parseDate(b.birthday);
+                        return dateA - dateB;
+                    });
+                }
+            }
         },
         setItems(state, action) {
             state.items = action.payload;
@@ -56,9 +60,7 @@ const profilesList = createSlice({
             })
             .addCase(fetchData.fulfilled, (state, action) => {
                 state.status = "succeeded";
-                state.profilesListOriginal = action.payload.toSorted((a, b) =>
-                    a.name.localeCompare(b.name)
-                );
+                state.profilesListOriginal = action.payload;
                 state.profilesList = state.profilesListOriginal.toSorted(
                     (a, b) => a.name.localeCompare(b.name)
                 );
@@ -70,11 +72,6 @@ const profilesList = createSlice({
     },
 });
 
-export const {
-    sortByName,
-    sortByBirthday,
-    setItems,
-    setRoleFilter,
-    setIsArchiveFilter,
-} = profilesList.actions;
+export const { sortProfiles, setItems, setRoleFilter, setIsArchiveFilter } =
+    profilesList.actions;
 export default profilesList.reducer;
