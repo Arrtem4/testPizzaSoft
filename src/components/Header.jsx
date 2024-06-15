@@ -1,10 +1,15 @@
 import { useState } from "react";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import {
+    sortByName,
+    sortByBirthday,
+    filterByRole,
+    filterByArchive,
+} from "../redux/slices/dataSlice";
 import Select, { components } from "react-select";
 
 export default function Header() {
-
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     const [showArchived, setShowArchived] = useState(false);
 
@@ -21,7 +26,8 @@ export default function Header() {
     ];
 
     const handleCheckboxChange = () => {
-        setShowArchived((prevShowArchived) => !prevShowArchived);
+        setShowArchived(!showArchived);
+        dispatch(filterByArchive(!showArchived));
     };
 
     // const [selectedOption, setSelectedOption] = useState("");
