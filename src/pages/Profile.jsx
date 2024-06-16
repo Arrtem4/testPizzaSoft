@@ -34,16 +34,18 @@ export default function Profile() {
     console.log(profile);
 
     const editName = (event) => {
-        const { value } = event.target;
         const regex = /^[a-zA-Zа-яА-ЯёЁ\s]*$/;
-        if (regex.test(value)) {
-            setProfile({ ...profile, name: value });
+        if (regex.test(event.target.value)) {
+            setProfile({ ...profile, name: event.target.value });
         }
     };
 
     const editPhone = (event) => {
-        const { value } = event.target;
-        setProfile({ ...profile, phone: value });
+        setProfile({ ...profile, phone: event.target.value });
+    };
+
+    const editDate = (event) => {
+        setProfile({ ...profile, birthday: event.target.value });
     };
 
     if (fetchStatus === "loading") {
@@ -63,7 +65,7 @@ export default function Profile() {
                     </button>
                 </section>
                 <section className="profile-page_settings-element name">
-                    <p className="profile-page-titles">Name</p>
+                    <p className="profile-page-titles">Name:</p>
                     <input
                         className="text-input"
                         type="text"
@@ -72,7 +74,7 @@ export default function Profile() {
                     />
                 </section>
                 <section className="profile-page_settings-element phone">
-                    <p className="profile-page-titles">Phone</p>
+                    <p className="profile-page-titles">Phone:</p>
                     <InputMask
                         mask="+7 (999) 999-99-99"
                         value={profile.phone}
@@ -87,7 +89,22 @@ export default function Profile() {
                         )}
                     </InputMask>
                 </section>
-                <section className="profile-page_settings-element date"></section>
+                <section className="profile-page_settings-element date">
+                    <p className="profile-page-titles">Birthday:</p>
+                    <InputMask
+                        mask="99.99.9999"
+                        value={profile.birthday}
+                        onChange={editDate}
+                    >
+                        {(inputProps) => (
+                            <input
+                                {...inputProps}
+                                className="text-input"
+                                type="text"
+                            />
+                        )}
+                    </InputMask>
+                </section>
                 <section className="profile-page_settings-element position"></section>
                 <section className="profile-page_settings-element archive"></section>
             </section>

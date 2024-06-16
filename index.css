@@ -162,7 +162,7 @@ body {
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  gap: 8cqmin;
+  gap: 5cqmin;
 }
 .profile-page-wrapper {
   width: 100%;
@@ -170,25 +170,34 @@ body {
 }
 .profile-page-photo {
   display: flex;
-  gap: 2cqmin;
+  gap: 1cqmin;
 }
 .profile-page_settings-element {
   display: flex;
-  align-items: center;
-  gap: 2cqmin;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1cqmin;
 }
 .profile-page_settings-element .text-input {
-  max-width: 55cqw;
+  width: 400px;
   font-family: inherit;
-  font-size: clamp(14px, 2cqmin, 22px);
+  font-size: clamp(16px, 2cqmin, 22px);
   border: 2px solid black;
   border-radius: 8px;
   padding: 5px;
+}
+.profile-page-titles {
+  font-weight: 500;
+  font-size: clamp(18px, 2.2cqmin, 24px);
 }
 
 @container (max-width: 600px) {
   .profile-page-photo {
     flex-direction: column;
+  }
+  .profile-page_settings-element .text-input {
+    max-width: none;
+    width: 100%;
   }
 }
 .not-found {

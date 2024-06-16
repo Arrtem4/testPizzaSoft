@@ -5,27 +5,32 @@
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    gap: 8cqmin;
+    gap: 5cqmin;
     &-wrapper {
         width: 100%;
         padding: 2cqmin 6cqmin;
     }
     &-photo {
         display: flex;
-        gap: 2cqmin;
+        gap: 1cqmin;
     }
     &_settings-element {
         display: flex;
-        align-items: center;
-        gap: 2cqmin;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1cqmin;
         & .text-input {
-            max-width: 55cqw;
+            width: 400px;
             font-family: inherit;
-            font-size: clamp(14px,2cqmin,22px);
+            font-size: clamp(16px, 2cqmin, 22px);
             border: 2px solid black;
             border-radius: 8px;
             padding: 5px;
         }
+    }
+    &-titles {
+        font-weight: 500;
+        font-size: clamp(18px, 2.2cqmin, 24px);
     }
 }
 
@@ -33,6 +38,12 @@
     .profile-page {
         &-photo {
             flex-direction: column;
+        }
+        &_settings-element {
+            & .text-input {
+                max-width: none;
+                width: 100%;
+            }
         }
     }
 }
