@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
-import { BsPersonCircle } from "react-icons/bs";
 import { useEffect, useState } from "react";
+import InputMask from "react-input-mask";
+import { BsPersonCircle } from "react-icons/bs";
 import ScreenMessage from "../components/ScreenMessage";
 
 export default function Profile() {
@@ -30,6 +31,21 @@ export default function Profile() {
         fetchDataProfile(id);
     }, [id]);
 
+    console.log(profile);
+
+    const editName = (event) => {
+        const { value } = event.target;
+        const regex = /^[a-zA-Zа-яА-ЯёЁ\s]*$/;
+        if (regex.test(value)) {
+            setProfile({ ...profile, name: value });
+        }
+    };
+
+    const editPhone = (event) => {
+        const { value } = event.target;
+        setProfile({ ...profile, phone: value });
+    };
+
     if (fetchStatus === "loading") {
         return <ScreenMessage text="Loading..." />;
     }
@@ -46,20 +62,34 @@ export default function Profile() {
                         Upload
                     </button>
                 </section>
-                <section className="profile-page_settings-element profile-page-name">
+                <section className="profile-page_settings-element name">
                     <p className="profile-page-titles">Name</p>
                     <input
+                        className="text-input"
                         type="text"
                         value={profile.name}
-                        onChange={(event) =>
-                            setProfile({ ...profile, name: event.target.value })
-                        }
+                        onChange={editName}
                     />
                 </section>
-                <section className="profile-page_settings-element profile-page-phone"></section>
-                <section className="profile-page_settings-element profile-page-date"></section>
-                <section className="profile-page_settings-element profile-page-position"></section>
-                <section className="profile-page_settings-element profile-page-archive"></section>
+                <section className="profile-page_settings-element phone">
+                    <p className="profile-page-titles">Phone</p>
+                    <InputMask
+                        mask="+7 (999) 999-99-99"
+                        value={profile.phone}
+                        onChange={editPhone}
+                    >
+                        {(inputProps) => (
+                            <input
+                                className="text-input"
+                                {...inputProps}
+                                type="phone"
+                            />
+                        )}
+                    </InputMask>
+                </section>
+                <section className="profile-page_settings-element date"></section>
+                <section className="profile-page_settings-element position"></section>
+                <section className="profile-page_settings-element archive"></section>
             </section>
         </section>
     );

@@ -18,6 +18,14 @@
         display: flex;
         align-items: center;
         gap: 2cqmin;
+        & .text-input {
+            max-width: 55cqw;
+            font-family: inherit;
+            font-size: clamp(14px,2cqmin,22px);
+            border: 2px solid black;
+            border-radius: 8px;
+            padding: 5px;
+        }
     }
 }
 

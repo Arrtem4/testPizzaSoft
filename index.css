@@ -177,6 +177,14 @@ body {
   align-items: center;
   gap: 2cqmin;
 }
+.profile-page_settings-element .text-input {
+  max-width: 55cqw;
+  font-family: inherit;
+  font-size: clamp(14px, 2cqmin, 22px);
+  border: 2px solid black;
+  border-radius: 8px;
+  padding: 5px;
+}
 
 @container (max-width: 600px) {
   .profile-page-photo {
