@@ -1,10 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-export const fetchData = createAsyncThunk("dataSlice/fetchData", async () => {
-    const response = await fetch("/testPizzaSoft/employees.json");
-    const data = await response.json();
-    return data;
-});
+export const fetchDataProfiles = createAsyncThunk(
+    "profilesDataSlice/fetchDataProfiles",
+    async () => {
+        const response = await fetch("/testPizzaSoft/employees.json");
+        const data = await response.json();
+        return data;
+    }
+);
 
 const initialState = {
     profilesList: [],
@@ -50,16 +53,16 @@ const profilesList = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchData.pending, (state) => {
+            .addCase(fetchDataProfiles.pending, (state) => {
                 state.status = "loading";
             })
-            .addCase(fetchData.fulfilled, (state, action) => {
+            .addCase(fetchDataProfiles.fulfilled, (state, action) => {
                 state.status = "succeeded";
                 state.profilesList = action.payload.toSorted((a, b) =>
                     a.name.localeCompare(b.name)
                 );
             })
-            .addCase(fetchData.rejected, (state, action) => {
+            .addCase(fetchDataProfiles.rejected, (state, action) => {
                 state.status = "failed";
                 state.error = action.error.message;
             });

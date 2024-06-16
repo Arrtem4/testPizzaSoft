@@ -1,22 +1,22 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchData } from "../redux/slices/dataSlice";
+import { fetchDataProfiles } from "../redux/slices/profilesDataSlice";
 import Header from "../components/Header";
 import ProfileCard from "../components/ProfileCard";
 
 export default function List() {
     const dispatch = useDispatch();
     const { profilesList, status, error } = useSelector(
-        (state) => state.dataSlice
+        (state) => state.profilesDataSlice
     );
-    const roleFilter = useSelector((state) => state.dataSlice.filters.role);
+    const roleFilter = useSelector((state) => state.profilesDataSlice.filters.role);
     const isArchiveFilter = useSelector(
-        (state) => state.dataSlice.filters.isArchive
+        (state) => state.profilesDataSlice.filters.isArchive
     );
 
     useEffect(() => {
         if (status === "idle") {
-            dispatch(fetchData());
+            dispatch(fetchDataProfiles());
         }
     }, [status, dispatch]);
 

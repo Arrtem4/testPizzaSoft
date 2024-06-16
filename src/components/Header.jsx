@@ -4,7 +4,7 @@ import {
     sortProfiles,
     setRoleFilter,
     setIsArchiveFilter,
-} from "../redux/slices/dataSlice";
+} from "../redux/slices/profilesDataSlice";
 import Select, { components } from "react-select";
 import { sortList, positionList } from "../data/optionLists";
 

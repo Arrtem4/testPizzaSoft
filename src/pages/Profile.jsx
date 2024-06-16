@@ -1,18 +1,16 @@
-import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+// import { useParams } from "react-router-dom";
+// import { useSelector } from "react-redux";
 import { BsPersonCircle } from "react-icons/bs";
-import { useState } from "react";
+// import { useState } from "react";
 
 export default function Profile() {
-    const { id } = useParams();
+    // const { id } = useParams();
 
-    const [name, setName] = useState(profile?.name || "");
-    const [birthday, setBirthday] = useState(profile?.birthday || "");
-    const [phone, setPhone] = useState(profile?.phone || "");
-    const [isArchive, setIsArchive] = useState(profile?.isArchive || false);
-    const [role, setRole] = useState(profile?.role || "all");
-
-    
+    // const [name, setName] = useState(profile?.name || "");
+    // const [birthday, setBirthday] = useState(profile?.birthday || "");
+    // const [phone, setPhone] = useState(profile?.phone || "");
+    // const [isArchive, setIsArchive] = useState(profile?.isArchive || false);
+    // const [role, setRole] = useState(profile?.role || "all");
 
     return (
         <section className="profile-page-wrapper">
@@ -25,11 +23,11 @@ export default function Profile() {
                 </section>
                 <section className="profile-page_settings-element profile-page-name">
                     <p className="profile-page-titles">Name</p>
-                    <input
+                    {/* <input
                         type="text"
                         value={name}
                         onChange={(event) => setName(event.target.value)}
-                    />
+                    /> */}
                 </section>
                 <section className="profile-page_settings-element profile-page-phone"></section>
                 <section className="profile-page_settings-element profile-page-date"></section>

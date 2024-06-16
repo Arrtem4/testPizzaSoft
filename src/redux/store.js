@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import dataSlice from "./slices/dataSlice";
+import profilesDataSlice from "./slices/profilesDataSlice";
+import profileDataSlice from "./slices/profileDataSlice";
 
 export default configureStore({
     reducer: {
-        dataSlice: dataSlice,
+        profilesDataSlice: profilesDataSlice,
+        profileDataSlice: profileDataSlice,
     },
 });
