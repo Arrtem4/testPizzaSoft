@@ -3,13 +3,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchDataProfiles } from "../redux/slices/profilesDataSlice";
 import Header from "../components/Header";
 import ProfileCard from "../components/ProfileCard";
+import ScreenMessage from "../components/ScreenMessage";
 
 export default function List() {
     const dispatch = useDispatch();
     const { profilesList, status, error } = useSelector(
         (state) => state.profilesDataSlice
     );
-    const roleFilter = useSelector((state) => state.profilesDataSlice.filters.role);
+    const roleFilter = useSelector(
+        (state) => state.profilesDataSlice.filters.role
+    );
     const isArchiveFilter = useSelector(
         (state) => state.profilesDataSlice.filters.isArchive
     );
@@ -27,22 +30,21 @@ export default function List() {
         return roleMatch && isArchiveMatch;
     });
 
+    if (status === "loading") {
+        return <ScreenMessage text="Loading..." />;
+    }
+    if (status === "failed") {
+        return <ScreenMessage text={error} />;
+    }
+
     return (
         <section className="list">
             <Header />
-            {status === "loading" && (
-                <div className="list-loading">Loading...</div>
-            )}
-            {status === "failed" && (
-                <div className="list-error">Error: {error}</div>
-            )}
-            {status === "succeeded" && (
-                <section className="list-container">
-                    {filteredProfiles.map((profile) => (
-                        <ProfileCard key={profile.id} profile={profile} />
-                    ))}
-                </section>
-            )}
+            <section className="list">
+                {filteredProfiles.map((profile) => (
+                    <ProfileCard key={profile.id} profile={profile} />
+                ))}
+            </section>
         </section>
     );
 }

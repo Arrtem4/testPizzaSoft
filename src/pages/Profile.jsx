@@ -1,16 +1,41 @@
-// import { useParams } from "react-router-dom";
-// import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { BsPersonCircle } from "react-icons/bs";
-// import { useState } from "react";
+import { useEffect, useState } from "react";
+import ScreenMessage from "../components/ScreenMessage";
 
 export default function Profile() {
-    // const { id } = useParams();
+    const { id } = useParams();
+    const [fetchStatus, setFetchStatus] = useState("loading");
+    const [errorMessage, setErrorMessage] = useState("");
+    const [profile, setProfile] = useState({});
 
-    // const [name, setName] = useState(profile?.name || "");
-    // const [birthday, setBirthday] = useState(profile?.birthday || "");
-    // const [phone, setPhone] = useState(profile?.phone || "");
-    // const [isArchive, setIsArchive] = useState(profile?.isArchive || false);
-    // const [role, setRole] = useState(profile?.role || "all");
+    useEffect(() => {
+        async function fetchDataProfile(id) {
+            try {
+                setFetchStatus("loading");
+                const response = await fetch("/testPizzaSoft/employees.json");
+                const data = await response.json();
+                const profile = data.find((profile) => profile.id === +id);
+                if (profile) {
+                    setFetchStatus("");
+                    setProfile(profile);
+                } else {
+                    throw new Error("Profile not found");
+                }
+            } catch (error) {
+                setFetchStatus("error");
+                setErrorMessage(error.message);
+            }
+        }
+        fetchDataProfile(id);
+    }, [id]);
+
+    if (fetchStatus === "loading") {
+        return <ScreenMessage text="Loading..." />;
+    }
+    if (fetchStatus === "error") {
+        return <ScreenMessage text={errorMessage} />;
+    }
 
     return (
         <section className="profile-page-wrapper">
@@ -23,11 +48,13 @@ export default function Profile() {
                 </section>
                 <section className="profile-page_settings-element profile-page-name">
                     <p className="profile-page-titles">Name</p>
-                    {/* <input
+                    <input
                         type="text"
-                        value={name}
-                        onChange={(event) => setName(event.target.value)}
-                    /> */}
+                        value={profile.name}
+                        onChange={(event) =>
+                            setProfile({ ...profile, name: event.target.value })
+                        }
+                    />
                 </section>
                 <section className="profile-page_settings-element profile-page-phone"></section>
                 <section className="profile-page_settings-element profile-page-date"></section>
