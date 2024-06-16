@@ -1,11 +1,14 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import InputMask from "react-input-mask";
+import Select, { components } from "react-select";
 import { BsPersonCircle } from "react-icons/bs";
 import ScreenMessage from "../components/ScreenMessage";
+import { positionList } from "../data/optionLists";
 
 export default function Profile() {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [fetchStatus, setFetchStatus] = useState("loading");
     const [errorMessage, setErrorMessage] = useState("");
     const [profile, setProfile] = useState({});
@@ -31,22 +34,25 @@ export default function Profile() {
         fetchDataProfile(id);
     }, [id]);
 
-    console.log(profile);
-
     const editName = (event) => {
         const regex = /^[a-zA-Zа-яА-ЯёЁ\s]*$/;
         if (regex.test(event.target.value)) {
             setProfile({ ...profile, name: event.target.value });
         }
     };
-
     const editPhone = (event) => {
         setProfile({ ...profile, phone: event.target.value });
     };
-
     const editDate = (event) => {
         setProfile({ ...profile, birthday: event.target.value });
     };
+    const editPosition = (option) => {
+        setProfile({ ...profile, role: option.value });
+    };
+    const editIsArchive = () => {
+        setProfile({ ...profile, isArchive: !profile.isArchive });
+    };
+    const NoInput = (props) => <components.Input {...props} readOnly />;
 
     if (fetchStatus === "loading") {
         return <ScreenMessage text="Loading..." />;
@@ -60,7 +66,7 @@ export default function Profile() {
             <section className="profile-page">
                 <section className="profile-page-photo">
                     <BsPersonCircle className="profile-card-photo" />
-                    <button disabled className="button button__profile_photo">
+                    <button className="button button__profile_photo disabled">
                         Upload
                     </button>
                 </section>
@@ -105,8 +111,37 @@ export default function Profile() {
                         )}
                     </InputMask>
                 </section>
-                <section className="profile-page_settings-element position"></section>
-                <section className="profile-page_settings-element archive"></section>
+                <section className="profile-page_settings-element position">
+                    <p className="profile-page-titles">Position:</p>
+                    <Select
+                        components={{ Input: NoInput }}
+                        options={positionList}
+                        onChange={editPosition}
+                        value={positionList.find(
+                            (role) => role.value === profile.role
+                        )}
+                    />
+                </section>
+                <section className="profile-page_settings-element archive">
+                    <label className="profile-page-titles">
+                        <input
+                            className="header-label"
+                            type="checkbox"
+                            checked={profile.isArchive}
+                            onChange={editIsArchive}
+                        />
+                        Archived
+                    </label>
+                </section>
+                <button
+                    className="button button__profile_save"
+                    onClick={() => navigate("/")}
+                >
+                    Back no changes
+                </button>
+                <button className="button button__profile_save disabled">
+                    Save
+                </button>
             </section>
         </section>
     );

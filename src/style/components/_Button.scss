@@ -14,9 +14,15 @@
             align-self: flex-end;
             background-color: rgb(20, 31, 88);
         }
+        &_save {
+            align-self: flex-start;
+        }
     }
     &__message {
         background-color: rgb(65, 74, 119);
+    }
+    &.disabled {
+        background-color: rgb(159, 163, 183);
     }
 }
 
@@ -24,6 +30,9 @@
     .button {
         &__profile {
             &_photo {
+                align-self: center;
+            }
+            &_save {
                 align-self: center;
             }
         }
